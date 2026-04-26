@@ -9,6 +9,14 @@ A machine learning system that:
 - Identifies key influencing factors
 - Provides actionable recommendations
 
+## 🎯 Why This Project Matters
+Most students don’t know what actually influences placement.
+
+This system transforms historical data into actionable insights, helping students:
+- Understand their placement probability
+- Identify key improvement areas
+- Make better career decisions
+
 ## 📊 Key Insights
 - Work experience increases placement probability by ~27%
 - Marketing & Finance specialization has ~23% higher placement rate than HR
@@ -33,3 +41,5 @@ A machine learning system that:
 ## ▶️ Run Locally
 pip install -r requirements.txt  
 streamlit run app.py
+
+
