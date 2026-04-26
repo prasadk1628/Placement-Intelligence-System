@@ -87,3 +87,9 @@ if st.button("Predict"):
         st.info("Profile looks strong. Focus on interview preparation.")
     else:
         st.info(" ".join(feedback))
+
+st.markdown("""
+### About
+This system analyzes student academic and professional profiles 
+to predict placement probability and provide actionable insights.
+""")
