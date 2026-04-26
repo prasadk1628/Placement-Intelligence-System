@@ -20,6 +20,7 @@ A machine learning system that:
 
 ## 🖥️ Demo
 -Starting screen
+<img width="486" height="711" alt="image" src="https://github.com/user-attachments/assets/2dcb6300-a1ad-4127-8a09-56f21df60840" />
 
 -After entering the details 
 <img width="384" height="571" alt="image" src="https://github.com/user-attachments/assets/bccd4587-e569-4b27-8150-7e726f930bde" />
