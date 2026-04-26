@@ -1,50 +1,34 @@
 # Placement Intelligence System
 
-## Overview
-A machine learning-based system that predicts student placement probability and provides actionable recommendations.
+## 🚀 Problem
+Students don’t know what actually impacts placement chances.
 
-## Features
-- Predict placement chances
-- Analyze key factors (CGPA, Work Experience, Specialisation)
-- Provide improvement suggestions
+## 💡 Solution
+A machine learning system that:
+- Predicts placement probability
+- Identifies key influencing factors
+- Provides actionable recommendations
 
-## Tech Stack
-- Python
-- Pandas, Scikit-learn
+## 📊 Key Insights
+- Work experience increases placement probability by ~27%
+- Marketing & Finance specialization has ~23% higher placement rate than HR
+- Academic consistency (SSC, HSC, Degree) is a strong predictor
+
+## ⚙️ Tech Stack
+- Python, Pandas, Scikit-learn
 - Streamlit
 
-## How to Run
-```bash
-pip install -r requirements.txt
+## 🖥️ Demo
+-Starting screen
+
+-After entering the details 
+<img width="384" height="571" alt="image" src="https://github.com/user-attachments/assets/bccd4587-e569-4b27-8150-7e726f930bde" />
+
+-Output screen
+<img width="395" height="567" alt="image" src="https://github.com/user-attachments/assets/cd7655e1-b45a-4355-97ba-646d82875c3b" />
+
+
+
+## ▶️ Run Locally
+pip install -r requirements.txt  
 streamlit run app.py
-
-##Insights
-Work experience significantly improves placement chances
-
-Marketing & Finance specialization has higher placement rate
-
-Academic consistency plays a key role
-
-￼
-
----
-
-# 🎯 Your Task
-
-1. Push project to GitHub  
-2. Share:
-   - Repo link  
-
----
-
-# ⚠️ Reality Check
-
-Anyone can build a project.  
-Very few can **present it cleanly online**.
-
-This step matters more than you think.
-
----
-
-After you send repo:
-👉 I’ll tear it apart and upgrade it to **top-tier level**.
