@@ -1,4 +1,5 @@
 # Placement Intelligence System
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20App-brightgreen)](https://placement-intelligence-system.streamlit.app/)
 
 ## 🚀 Problem
 Students don’t know what actually impacts placement chances.
