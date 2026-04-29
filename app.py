@@ -12,15 +12,23 @@ st.markdown("### Know your placement chances & how to improve")
 model = joblib.load("placement_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
-st.title("Placement Prediction System")
+# ===== INPUT SECTION =====
+st.subheader("📌 Enter Your Details")
 
-# ===== INPUTS =====
+col1, col2 = st.columns(2)
 
-ssc_p = st.number_input("10th Percentage", 0.0, 100.0)
-hsc_p = st.number_input("12th Percentage", 0.0, 100.0)
-degree_p = st.number_input("Degree Percentage", 0.0, 100.0)
-etest_p = st.number_input("Employability Test %", 0.0, 100.0)
-mba_p = st.number_input("MBA Percentage", 0.0, 100.0)
+with col1:
+    ssc_p = st.number_input("10th %", 0.0, 100.0)
+    hsc_p = st.number_input("12th %", 0.0, 100.0)
+    degree_p = st.number_input("Degree %", 0.0, 100.0)
+
+with col2:
+    etest_p = st.number_input(
+        "Aptitude Test Score (0-100)", 
+        0.0, 100.0,
+        help="Score in aptitude tests like reasoning, quantitative, or mock placement tests"
+    )
+    mba_p = st.number_input("MBA %", 0.0, 100.0)
 
 # Categorical inputs
 gender = st.selectbox("Gender", ["Female", "Male"])
@@ -60,14 +68,56 @@ if st.button("🚀 Predict Placement Chances"):
     pred = model.predict(scaled)[0]
     prob = model.predict_proba(scaled)[0][1]
 
-    st.subheader(f"Placement Chance: {prob*100:.2f}%")
+    st.divider()
 
-    if pred == 1:
-        st.success("Likely to be Placed")
+    # ===== RESULT =====
+    st.subheader("📊 Your Result")
+
+    display_prob = min(prob, 0.95)  # avoid unrealistic 100%
+    risk = 1 - prob
+
+    st.progress(float(display_prob))
+
+    colA, colB = st.columns(2)
+    with colA:
+        st.metric("Placement Probability", f"{display_prob*100:.1f}%")
+    with colB:
+        st.metric("Risk Level", f"{risk*100:.1f}%")
+
+    # ===== INTERPRETATION =====
+    if prob > 0.85:
+        st.success("🔥 Strong chances of placement")
+    elif prob > 0.65:
+        st.warning("⚠️ Moderate chances — improvement needed")
+    else:
+        st.error("❌ Low chances — take action")
+
+    if prob > 0.9:
+        st.info("⚠️ Model confidence is high — interpret with caution")
+
+    st.caption("Note: Predictions are based on limited data and should be used as guidance.")
+
+    # ===== WHY THIS RESULT =====
+    st.subheader("🧠 Why this result?")
+
+    reasons = []
+    if workex_Yes:
+        reasons.append("Work experience improves your chances")
+    if specialisation_MktHR:
+        reasons.append("HR specialization has lower placement rate than Finance")
+    if degree_p < 65:
+        reasons.append("Low degree percentage affects placement chances")
+    if ssc_p < 70:
+        reasons.append("Academic consistency is important")
+
+    if reasons:
+        for r in reasons:
+            st.write("•", r)
     else:
         st.write("• Your profile is well-balanced")
 
-    # ===== FEEDBACK SYSTEM =====
+    # ===== FEEDBACK =====
+    st.subheader("💡 How to Improve")
 
     feedback = []
 
@@ -86,4 +136,15 @@ if st.button("🚀 Predict Placement Chances"):
     if not feedback:
         st.success("Your profile looks strong. Focus on interview preparation.")
     else:
-        st.info(" ".join(feedback))
+        for f in feedback:
+            st.write("•", f)
+
+# ===== FOOTER =====
+st.divider()
+st.markdown("""
+### About  
+This system analyzes student academic and professional profiles  
+to predict placement probability and provide actionable insights.  
+
+Built by Prasad 🚀
+""")
