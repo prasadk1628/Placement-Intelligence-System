@@ -27,7 +27,8 @@ This system transforms historical data into actionable insights, helping student
 - Python, Pandas, Scikit-learn
 - Streamlit
 
-## 🖥️ Demo
+## 🖥️ Screenshots
+
 -Starting screen
 <img width="486" height="711" alt="image" src="https://github.com/user-attachments/assets/2dcb6300-a1ad-4127-8a09-56f21df60840" />
 
