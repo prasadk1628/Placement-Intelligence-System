@@ -7,7 +7,6 @@ import streamlit as st
 import numpy as np
 import joblib
 import time
-import time
 
 # ── PAGE CONFIG — "centered" layout, not wide ──────────────────────────────
 st.set_page_config(
@@ -119,13 +118,10 @@ workex_Yes        = 1 if workex == "Yes" else 0
 specialisation_HR = 1 if "Human Resources" in specialisation else 0
 
 features = np.array([[
-features = np.array([[
     ssc_p, hsc_p, degree_p, etest_p, mba_p,
-    gender_M, ssc_b_Others, hsc_b_Others,
     gender_M, ssc_b_Others, hsc_b_Others,
     hsc_s_Commerce, hsc_s_Science,
     degree_t_Others, degree_t_SciTech,
-    workex_Yes, specialisation_HR,
     workex_Yes, specialisation_HR,
 ]])
 
@@ -218,7 +214,6 @@ if run:
     # ── Why this score ──
     st.markdown('<div class="sec-lbl">05 — Why This Score?</div>', unsafe_allow_html=True)
 
-    insights = []
     insights = []
     if workex_Yes:
         insights.append(("✅", "Work Experience",
