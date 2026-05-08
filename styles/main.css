@@ -1,0 +1,569 @@
+from pathlib import Path
+
+css = r"""
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap');
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================================
+   ROOT APP
+========================================================= */
+
+.stApp {
+    background:
+        radial-gradient(circle at top, rgba(79, 142, 247, 0.10), transparent 45%),
+        linear-gradient(to bottom, #06080D, #090C14);
+    color: #E6EAF2;
+}
+
+/* Main container */
+
+.main .block-container {
+    max-width: 760px;
+    padding: 2.5rem 2.5rem 5rem;
+    margin: 0 auto;
+
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Hide Streamlit junk */
+
+#MainMenu,
+header,
+footer {
+    visibility: hidden;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.hero {
+    padding: 2rem 0 2.5rem;
+}
+
+.hero-eyebrow,
+.sec-lbl,
+.footer {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 10px;
+    color: #4F8EF7;
+
+    margin-bottom: 1rem;
+}
+
+.hero-eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: #4F8EF7;
+}
+
+.hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 8vw, 58px);
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+
+    color: #F4F7FB;
+
+    margin-bottom: 1rem;
+}
+
+.hero-title .grad {
+    background: linear-gradient(135deg, #4F8EF7, #9B6CF5, #4F8EF7);
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: glowShift 6s linear infinite;
+}
+
+@keyframes glowShift {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.hero-sub {
+    max-width: 520px;
+
+    color: #8891A7;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   SECTION LABELS
+========================================================= */
+
+.sec-lbl {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 2rem 0 1.25rem;
+
+    color: #4F8EF7;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.sec-lbl::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+
+    background: linear-gradient(90deg, #1F2740 40%, transparent);
+}
+
+/* =========================================================
+   DEMO TAG
+========================================================= */
+
+.demo-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 14px;
+    margin-bottom: 1rem;
+
+    border-radius: 10px;
+    border: 1px solid rgba(79, 142, 247, 0.20);
+
+    background: rgba(79, 142, 247, 0.08);
+
+    color: #7FB0FF;
+    font-size: 11px;
+
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+div[data-testid="stNumberInput"] input,
+div[data-testid="stSelectbox"] > div > div {
+    background: #0E131D !important;
+
+    border: 1px solid #20293B !important;
+    border-radius: 10px !important;
+
+    color: #E4E8F2 !important;
+
+    min-height: 46px !important;
+
+    transition: all 0.2s ease !important;
+}
+
+div[data-testid="stNumberInput"] input {
+    padding: 0 12px !important;
+
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 14px !important;
+}
+
+div[data-testid="stNumberInput"] input:focus,
+div[data-testid="stSelectbox"] > div > div:focus-within {
+    border-color: #4F8EF7 !important;
+
+    box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.15) !important;
+}
+
+div[data-testid="stNumberInput"] label,
+div[data-testid="stSelectbox"] label,
+div[data-testid="stSlider"] label {
+    color: #9AA4BC !important;
+
+    font-size: 12px !important;
+    font-weight: 500 !important;
+
+    margin-bottom: 6px !important;
+}
+
+div[data-testid="stNumberInput"] button {
+    background: #161C29 !important;
+
+    border: 1px solid #20293B !important;
+    border-radius: 8px !important;
+
+    color: #95A0B7 !important;
+}
+
+div[data-testid="stNumberInput"] button:hover {
+    background: #1D2536 !important;
+}
+
+/* Select dropdown */
+
+div[data-baseweb="select"] span {
+    color: #E4E8F2 !important;
+}
+
+div[data-baseweb="popover"] {
+    background: #0E131D !important;
+    border: 1px solid #20293B !important;
+}
+
+li[role="option"] {
+    color: #D4D9E6 !important;
+}
+
+li[role="option"]:hover {
+    background: #161C29 !important;
+}
+
+/* Slider */
+
+div[data-testid="stSlider"] [data-testid="stTickBar"] {
+    display: none;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+div[data-testid="stButton"] > button {
+    width: 100% !important;
+    height: 54px !important;
+
+    border: none !important;
+    border-radius: 12px !important;
+
+    background: linear-gradient(135deg, #2858D6, #4F8EF7) !important;
+
+    color: white !important;
+
+    font-family: 'Syne', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+
+    box-shadow: 0 8px 32px rgba(79, 142, 247, 0.30) !important;
+
+    transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+}
+
+div[data-testid="stButton"] > button:hover {
+    transform: translateY(-2px) !important;
+
+    box-shadow: 0 10px 36px rgba(79, 142, 247, 0.42) !important;
+}
+
+/* =========================================================
+   RESULT CARD
+========================================================= */
+
+.result-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 3rem 2rem;
+
+    border-radius: 20px;
+    border: 1px solid #1A2540;
+
+    background:
+        linear-gradient(160deg, rgba(79,142,247,0.08), transparent 45%),
+        linear-gradient(180deg, #0B1019, #090D15);
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.result-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at top, rgba(79,142,247,0.12), transparent 40%);
+
+    pointer-events: none;
+}
+
+.rc-label {
+    color: #697388;
+
+    font-size: 10px;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+
+    font-family: 'IBM Plex Mono', monospace;
+
+    margin-bottom: 1rem;
+}
+
+.rc-score {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(72px, 10vw, 92px);
+    font-weight: 800;
+
+    line-height: 1;
+    letter-spacing: -0.05em;
+
+    margin-bottom: 0.5rem;
+}
+
+.rc-score.hi {
+    color: #22C97A;
+}
+
+.rc-score.mi {
+    color: #F5A623;
+}
+
+.rc-score.lo {
+    color: #F0454A;
+}
+
+.rc-verdict {
+    color: #F4F7FB;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    margin-bottom: 0.4rem;
+
+    font-family: 'Syne', sans-serif;
+}
+
+.rc-sub {
+    color: #8A93A9;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   METRICS
+========================================================= */
+
+div[data-testid="metric-container"] {
+    background: #0B1019 !important;
+
+    border: 1px solid #1C2436 !important;
+    border-radius: 14px !important;
+
+    padding: 16px !important;
+}
+
+div[data-testid="stMetricValue"] {
+    color: #F4F7FB !important;
+
+    font-family: 'IBM Plex Mono', monospace !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: #667086 !important;
+
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+
+    font-size: 10px !important;
+}
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+div[data-testid="stProgress"] > div > div {
+    background: #141B28 !important;
+
+    border-radius: 999px !important;
+    height: 10px !important;
+}
+
+div[data-testid="stProgress"] > div > div > div {
+    background: linear-gradient(90deg, #2858D6, #4F8EF7, #9B6CF5) !important;
+
+    border-radius: 999px !important;
+}
+
+/* =========================================================
+   INSIGHT GRID
+========================================================= */
+
+.ig {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.ig-tile,
+.ai {
+    background: #0B1019;
+
+    border: 1px solid #1C2436;
+    border-radius: 14px;
+
+    transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.ig-tile:hover,
+.ai:hover {
+    transform: translateY(-2px);
+
+    border-color: #2D4677;
+}
+
+.ig-tile {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 16px;
+}
+
+.ig-icon {
+    font-size: 18px;
+}
+
+.ig-txt {
+    color: #8D96AA;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.ig-txt strong {
+    display: block;
+
+    color: #F0F4FB;
+
+    margin-bottom: 3px;
+}
+
+/* =========================================================
+   ACTION ITEMS
+========================================================= */
+
+.ai {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.ai-num {
+    min-width: 34px;
+
+    padding: 5px 8px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    text-align: center;
+
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.ai-body {
+    color: #8D96AA;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.ai-body strong {
+    display: block;
+
+    color: #F4F7FB;
+
+    margin-bottom: 4px;
+
+    font-size: 14px;
+}
+
+.ai-tag {
+    margin-left: 8px;
+
+    padding: 2px 7px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    padding: 3rem 0 1rem;
+
+    text-align: center;
+
+    color: #4A5368;
+    font-size: 10px;
+}
+
+.footer b {
+    color: #4F8EF7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .main .block-container {
+        padding: 1.5rem 1rem 4rem;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .result-card {
+        padding: 2rem 1.25rem;
+    }
+
+    .ig {
+        grid-template-columns: 1fr;
+    }
+}
+"""
+
+output = Path("/mnt/data/enhanced_main.css")
+output.write_text(css, encoding="utf-8")
+
+print("Enhanced CSS file generated.")
+print(output)
