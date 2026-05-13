@@ -200,15 +200,16 @@ if run:
             f'<div class="s-val">{value:.0f}</div></div>'
         )
 
-    st.markdown(
-        sbar("10th Grade", ssc_p) +
-        sbar("12th Grade", hsc_p) +
-        sbar("Degree %",   degree_p) +
-        sbar("Aptitude",   etest_p) +
-        (sbar("PG / MBA",  mba_p) if mba_p > 0 else ""),
-        unsafe_allow_html=True,
-    )
+    # KPIs — 4 equal columns
+    k1, k2, k3, k4 ,k5 = st.columns(5, gap="medium")
+    k1.metric("10th Grade",  f"{ssc_p}")
+    k2.metric("12th Grade",        f"{hsc_p}")
+    k3.metric("Degree %",    f"{degree_p}")
+    k4.metric("Aptitude",      f"{etest_p}")
+    k5.metric("PG / MBA", f"{mba_p} if mba_p > 0 else "" " )
+    unsafe_allow_html=True
 
+    
     st.divider()
 
     # ── Why this score ──
